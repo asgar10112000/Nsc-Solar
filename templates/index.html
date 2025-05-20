@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consumer Search</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Search Consumer Details</h1>
+  <input type="text" id="consumerNumber" placeholder="Enter Consumer Number" />
+  <button onclick="searchConsumer()">Search</button>
+
+  <div id="result" class="result"></div>
+
+  <script>
+    async function searchConsumer() {
+      const number = document.getElementById('consumerNumber').value.trim();
+      const resultBox = document.getElementById('result');
+      if (!number) {
+        resultBox.innerHTML = "Please enter a Consumer Number.";
+        return;
+      }
+
+      resultBox.innerHTML = 'Searching...';
+
+      try {
+        const res = await fetch(`/search?consumer_number=${encodeURIComponent(number)}`);
+        if (res.ok) {
+          const data = await res.json();
+          resultBox.innerHTML = Object.entries(data)
+            .map(([key, value]) => `<strong>${key}</strong>: ${value}`)
+            .join('<br>');
+        } else {
+          const error = await res.json();
+          resultBox.innerHTML = error.message || 'No data found.';
+        }
+      } catch (err) {
+        resultBox.innerHTML = "Error connecting to the server.";
+      }
+    }
+  </script>
+</body>
+</html>
