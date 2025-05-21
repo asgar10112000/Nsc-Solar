@@ -1,17 +1,106 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
+  transition: background 1s ease, color 0.5s ease;
+  min-height: 100vh;
 }
 
 input,
-button {
+button:not(#themeToggle) {
   padding: 10px;
   margin: 10px 0;
   font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+input {
+  width: 250px;
+}
+
+button:not(#themeToggle) {
+  background-color: #ff9800;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:not(#themeToggle):hover {
+  background-color: #e68900;
 }
 
 .result {
   margin-top: 20px;
   border: 1px solid #ccc;
   padding: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#themeToggle {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  padding: 10px;
+  font-size: 20px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 999;
+}
+
+#themeToggle:hover {
+  background: #eee;
+}
+
+/* ==== THEMES ==== */
+
+/* Default Light Theme */
+.theme-light {
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+/* Snow Theme */
+.theme-snow {
+  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+  color: #333;
+}
+
+/* Greenery Theme */
+.theme-greenery {
+  background: linear-gradient(to right, #a8e063, #56ab2f);
+  color: #fff;
+}
+
+/* Love Theme */
+.theme-love {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: #fff;
+}
+
+/* Dark Theme with Animation */
+.theme-dark {
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+}
+
+/* Matching result box style in dark mode */
+.theme-dark .result,
+.theme-snow .result,
+.theme-greenery .result,
+.theme-love .result {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
