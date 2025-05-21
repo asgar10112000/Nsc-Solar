@@ -5,8 +5,8 @@
   <title>Consumer Search</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <button id="themeToggle">🌙</button>
+<body class="theme-light">
+  <button id="themeToggle">🎨</button>
 
   <h1>Search Consumer Details</h1>
   <input type="text" id="consumerNumber" placeholder="Enter Consumer Number" />
@@ -15,12 +15,19 @@
   <div id="result" class="result"></div>
 
   <script>
-    const toggleButton = document.getElementById('themeToggle');
+    const themes = ['theme-light', 'theme-snow', 'theme-greenery', 'theme-love', 'theme-dark'];
+    let currentThemeIndex = 0;
+    const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
 
-    toggleButton.addEventListener('click', () => {
-      body.classList.toggle('dark-theme');
-      toggleButton.textContent = body.classList.contains('dark-theme') ? '☀️' : '🌙';
+    function applyTheme(index) {
+      themes.forEach(theme => body.classList.remove(theme));
+      body.classList.add(themes[index]);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      applyTheme(currentThemeIndex);
     });
 
     async function searchConsumer() {
