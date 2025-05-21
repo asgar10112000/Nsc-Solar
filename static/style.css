@@ -3,8 +3,6 @@ body {
   padding: 20px;
   transition: background 1s ease, color 0.5s ease;
   min-height: 100vh;
-  background-color: #f4f4f4;
-  color: #222;
 }
 
 input,
@@ -58,16 +56,47 @@ button:not(#themeToggle):hover {
   background: #eee;
 }
 
-body.dark-theme {
+/* ==== THEMES ==== */
+
+/* Default Light Theme */
+.theme-light {
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+/* Snow Theme */
+.theme-snow {
+  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+  color: #333;
+}
+
+/* Greenery Theme */
+.theme-greenery {
+  background: linear-gradient(to right, #a8e063, #56ab2f);
   color: #fff;
+}
+
+/* Love Theme */
+.theme-love {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: #fff;
+}
+
+/* Dark Theme with Animation */
+.theme-dark {
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
+  color: #fff;
 }
 
-body.dark-theme .result {
-  border: 1px solid #fff;
-  background: rgba(0, 0, 0, 0.3);
+/* Matching result box style in dark mode */
+.theme-dark .result,
+.theme-snow .result,
+.theme-greenery .result,
+.theme-love .result {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 @keyframes gradientBG {
