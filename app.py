@@ -23,11 +23,21 @@ def search():
     if not row:
         return jsonify({'message': 'No record found'}), 404
 
-    # Create a dict of column_name: value
+    # List of important fields to include in the response
+    important_fields = [
+        "Circle", "Division", "Sub-Division", "SRType",
+        "MI Status", "Applicant Name", "Address",
+        "District", "Phase", "Load"
+    ]
+
+    # Get all column names
     columns = [column[0] for column in cursor.description]
-    result = dict(zip(columns, row))
+    row_dict = dict(zip(columns, row))
 
-    return jsonify(result)
+    # Filter to only important fields
+    filtered_result = {key: row_dict[key] for key in important_fields if key in row_dict}
 
-if __name__ == '__main__':
+    return jsonify(filtered_result)
+
+if __name__ == '__main__': 
     app.run(debug=True)
